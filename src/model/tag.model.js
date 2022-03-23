@@ -1,26 +1,19 @@
-const { DataTypes } = require('sequelize')
-const seq = require('../db/seq')
+const mongoose = require('../db')
 
-const Tag = seq.define('Tag', {
-  //id会被sequelize自动创建
+const Tag = mongoose.model('Tag', {
   tag_name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-    comment: '标签名'
+    type: String,
+    required: true,
+    trim: true
   },
-  tag_color: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    defaultValue: '#ffffff',
-    comment: '标签颜色'
+  color: {
+    type: String,
+    required: true
   }
-}, {
-  //数据库中生成数据时不添加时间戳
-  //timestamps: false
 });
 
 //单独执行此文件在数据库中生成model
-// Tag.sync({force: true})
+// User.sync({force: true})
+// Tag().save()
 
 module.exports = Tag

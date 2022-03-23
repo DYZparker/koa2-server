@@ -1,16 +1,17 @@
 # 文件目录
 
-app--封装koa，注册全局中间件
-config--用dotenv将环境变量挂载到process.env
-constant--保存常量，（错误类型等等）
-controller--控制器，处理匹配的路由回调（操作数据库）
-db--用Sequelize连接mysql数据库
-middleware--自定义中间件
-model--对应数据库的对象，转换为可操作
-router--路由，并为单个路由注册所需中间件
-service--数据库操作
-main.js--文件入口
-.env--环境变量
+- app--封装koa，注册全局中间件
+
+- config--用dotenv将环境变量挂载到process.env
+- constant--保存常量，（错误类型等等）
+- controller--控制器，处理匹配的路由回调（操作数据库）
+- db--用Sequelize连接mysql数据库
+- middleware--自定义中间件
+- model--对应数据库的对象，转换为可操作
+- router--路由，并为单个路由注册所需中间件
+- service--数据库操作
+- main.js--文件入口
+- .env--环境变量
 
 
 

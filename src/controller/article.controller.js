@@ -1,32 +1,34 @@
-const { createTag, getTagList, updateTag, removeTag } = require('../service/tag.service')
+const { 
+  createArticle, 
+  getArticle, 
+  getArticleList, 
+  updateArticle, 
+  removeArticle 
+} = require('../service/article.service')
 const { userRegisterError } = require('../constant/err.type')
 
-class TagController {
+class ArticleController {
   async create(ctx, next) {
-    const { tag_name, color } = ctx.request.body
+    const payload = ctx.request.body
     try {
-      const res = await createTag(tag_name, color)
+      const res = await createArticle(payload)
       ctx.body = {
         code: 0,
-        message: '添加标签成功',
-        result: {
-          id: res.id,
-          tag_name: res.tag_name,
-          color: res.color
-        }
+        message: '添加文章成功',
+        result: ''
       }
     }catch(err) {
-      console.error('标签添加错误', err)
+      console.error('文章添加失败', err)
       // ctx.app.emit('error', userRegisterError, ctx)
     }
   }
 
-  async findAll(ctx, next) {
+  async findOne(ctx, next) {
     try {
-      const res = await getTagList()
+      const res = await getArticle()
       ctx.body = {
         code: 0,
-        message: '查询标签列表成功',
+        message: '查询标签列表成功1',
         result: {
           tagList: res
         }
@@ -36,12 +38,26 @@ class TagController {
     }
   }
 
+  async findAll(ctx, next) {
+    const payload = ctx.request.query
+    try {
+      const res = await getArticleList(payload)
+      ctx.body = {
+        code: 0,
+        message: '查询文章列表成功',
+        result: res
+      }
+    }catch(err) {
+      console.error('查询文章列表失败', err)
+    }
+  }
+
   async update(ctx, next) {
     const id = ctx.params.id
     const { tag_name, color } = ctx.request.body
 
     try {
-      const res = await updateTag({id, tag_name, color})
+      const res = await updateArticle({id, tag_name, color})
       if (res) {
         ctx.body = {
           code: 0,
@@ -63,7 +79,7 @@ class TagController {
   async remove(ctx, next) {
     const id = ctx.params.id
     try {
-      const res = await removeTag({ id })
+      const res = await removeArticle({ id })
       if (res) {
         ctx.body = {
           code: 0,
@@ -83,4 +99,4 @@ class TagController {
   }
 }
 
-module.exports = new TagController()
+module.exports = new ArticleController()

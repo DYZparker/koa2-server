@@ -3,22 +3,26 @@ const seq = require('../db/seq')
 
 const Link = seq.define('Link', {
   //id会被sequelize自动创建
-  user_name: {
+  link_name: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
-    comment: '用户名，唯一'
+    comment: '链接名称'
   },
-  password: {
-    type: DataTypes.CHAR(64),
+  link_href: {
+    type: DataTypes.STRING,
     allowNull: false,
-    comment: '密码'
+    comment: '链接地址'
   },
-  is_admin: {
-    type: DataTypes.BOOLEAN,
+  type_name: {
+    type: DataTypes.STRING,
     allowNull: false,
-    defaultValue: 0,
-    comment: '是否为管理员，0：不是（默认），1：是'
+    comment: '链接类型'
+  },
+  img_src: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    comment: '图标地址'
   }
 }, {
   //数据库中生成数据时不添加时间戳

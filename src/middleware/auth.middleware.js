@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken')
 
 const { JWT_SECRET } = require('../config/config.default')
-
 const {
   tokenExpiredError,
   invalidToken,
@@ -15,7 +14,7 @@ const auth = async (ctx, next) => {
   try {
     // user中包含了payload的信息(id, user_name, is_admin)
     const user = jwt.verify(token, JWT_SECRET)
-    ctx.state.user = user
+    ctx.state.user = user._doc
   } catch (err) {
     switch (err.name) {
       case 'TokenExpiredError':

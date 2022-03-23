@@ -1,7 +1,12 @@
 const jwt = require('jsonwebtoken')
-const { createUser, getUserInfo, updateById } = require('../service/user.service')
-const { userRegisterError } = require('../constant/err.type')
+
 const { JWT_SECRET } = require('../config/config.default')
+const { 
+  createUser, 
+  getUserInfo, 
+  updateById 
+} = require('../service/user.service')
+const { userRegisterError } = require('../constant/err.type')
 
 class UserController {
   async register(ctx, next) {
@@ -32,6 +37,7 @@ class UserController {
         code: 0,
         message: '用户登陆成功',
         result: {
+          //登陆后返回token
           token: jwt.sign(res, JWT_SECRET, {expiresIn: '1d'})
         }
       }
@@ -41,11 +47,9 @@ class UserController {
   }
 
   async changePassword(ctx, next) {
-    // 1. 获取数据
-    const id = ctx.state.user.id
+    const id = ctx.state.user._id
     const password = ctx.request.body.password
 
-    // 2. 操作数据库
     if (await updateById({ id, password })) {
       ctx.body = {
         code: 0,
@@ -59,7 +63,6 @@ class UserController {
         result: '',
       }
     }
-    // 3. 返回结果
   }
 }
 

@@ -44,4 +44,14 @@ module.exports = {
     message: '没有管理员权限',
     result: ''
   },
+  unSupportedFileType: {
+    code: '10201',
+    message: '不支持的文件格式',
+    result: '',
+  },
+  fileUploadError: {
+    code: '10202',
+    message: '图片上传失败',
+    result: '',
+  },
 }
